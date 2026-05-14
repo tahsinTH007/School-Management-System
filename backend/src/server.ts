@@ -9,7 +9,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import cors from "cors";
 import { connectDB } from "./config/db";
-import userRoutes from "./routes/user";
+import userRoutes from "./routes/user.ts";
 
 dotenv.config();
 

@@ -1,8 +1,10 @@
 import { type Request, type Response } from "express";
 import User from "../model/user";
+import { generateToken } from "../utils/generateToken";
 
 export const register = async (req: Request, res: Response): Promise<void> => {
   try {
+    console.log(req.body);
     const {
       name,
       email,
@@ -43,6 +45,22 @@ export const register = async (req: Request, res: Response): Promise<void> => {
       });
     } else {
       res.status(400).json({ message: "Invalid user data" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Server Error", error });
+  }
+};
+
+export const login = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+
+    if (user && (await user.matchPassword(password))) {
+      generateToken(user.id.toString(), res);
+      res.json(user);
+    } else {
+      res.status(401).json({ message: "Invalid email or password" });
     }
   } catch (error) {
     res.status(500).json({ message: "Server Error", error });
