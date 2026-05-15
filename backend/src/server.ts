@@ -8,8 +8,11 @@ import helmet from "helmet";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import cors from "cors";
+
 import { connectDB } from "./config/db";
+
 import userRoutes from "./routes/user.ts";
+import LogsRouter from "./routes/activitieslog.ts";
 
 dotenv.config();
 
@@ -43,6 +46,7 @@ app.get("/", (_req: Request, res: Response) => {
 });
 
 app.use("/api/users", userRoutes);
+app.use("/api/activities", LogsRouter);
 
 app.use((err: Error, _req: Request, res: Response, _next: Function) => {
   const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
