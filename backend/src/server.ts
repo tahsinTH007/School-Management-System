@@ -32,7 +32,13 @@ app.use(
   }),
 );
 
+app.use((req, _res, next) => {
+  console.log(req.method, req.url);
+  next();
+});
+
 app.get("/", (_req: Request, res: Response) => {
+  console.log("Health check endpoint hit");
   res.status(200).json({ status: "OK", message: "Server is healthy" });
 });
 

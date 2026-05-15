@@ -1,10 +1,10 @@
 import { type Request, type Response } from "express";
 import User from "../model/user";
 import { generateToken } from "../utils/generateToken";
+import { logActivity } from "../utils/activitieslog";
 
 export const register = async (req: Request, res: Response): Promise<void> => {
   try {
-    console.log(req.body);
     const {
       name,
       email,
@@ -33,6 +33,13 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     });
 
     if (newUser) {
+      if ((req as any).user) {
+        await logActivity({
+          userId: (req as any).user._id,
+          action: "Registered User",
+          details: `Registered user with email: ${newUser.email}`,
+        });
+      }
       res.status(201).json({
         _id: newUser._id,
         name: newUser.name,
