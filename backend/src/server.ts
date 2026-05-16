@@ -13,6 +13,7 @@ import { connectDB } from "./config/db";
 
 import userRoutes from "./routes/user.ts";
 import LogsRouter from "./routes/activitieslog.ts";
+import academicYearRouter from "./routes/academicYear.ts";
 
 dotenv.config();
 
@@ -47,6 +48,7 @@ app.get("/", (_req: Request, res: Response) => {
 
 app.use("/api/users", userRoutes);
 app.use("/api/activities", LogsRouter);
+app.use("/api/academic-years", academicYearRouter);
 
 app.use((err: Error, _req: Request, res: Response, _next: Function) => {
   const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
