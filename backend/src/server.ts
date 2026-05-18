@@ -15,6 +15,7 @@ import userRoutes from "./routes/user.ts";
 import LogsRouter from "./routes/activitieslog.ts";
 import academicYearRouter from "./routes/academicYear.ts";
 import classRouter from "./routes/class.ts";
+import subjectRouter from "./routes/subject.ts";
 import examRouter from "./routes/exam.ts";
 
 dotenv.config();
@@ -52,6 +53,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/activities", LogsRouter);
 app.use("/api/academic-years", academicYearRouter);
 app.use("/api/classes", classRouter);
+app.use("/api/subjects", subjectRouter);
 app.use("/api/exams", examRouter);
 
 app.use((err: Error, _req: Request, res: Response, _next: Function) => {
