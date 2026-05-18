@@ -65,3 +65,49 @@ export const getAllSubjects = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Server Error", error });
   }
 };
+
+export const updateSubject = async (req: Request, res: Response) => {
+  try {
+    const { name, code, teacher, isActive } = req.body;
+
+    const updatedSubject = await subject.findByIdAndUpdate(
+      req.params.id,
+      {
+        name,
+        code,
+        isActive,
+        teacher: Array.isArray(teacher) ? teacher : [],
+      },
+      { new: true, runValidators: true },
+    );
+    const userId = (req as any).user._id;
+    await logActivity({
+      userId,
+      action: `Updated subject: ${updatedSubject?.name}`,
+    });
+    if (!updatedSubject) {
+      return res.status(404).json({ message: "Subject not found" });
+    }
+
+    res.json(updatedSubject);
+  } catch (error) {
+    res.status(500).json({ message: "Server Error", error });
+  }
+};
+
+export const deleteSubject = async (req: Request, res: Response) => {
+  try {
+    const deletedSubject = await subject.findByIdAndDelete(req.params.id);
+    if (!deletedSubject) {
+      return res.status(404).json({ message: "Subject not found" });
+    }
+    const userId = (req as any).user._id;
+    await logActivity({
+      userId,
+      action: `Updated subject: ${deletedSubject?.name}`,
+    });
+    res.json({ message: "Subject deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Server Error", error });
+  }
+};

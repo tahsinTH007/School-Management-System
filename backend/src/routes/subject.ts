@@ -1,6 +1,11 @@
 import express from "express";
 import { authorize, protect } from "../middleware/auth.ts";
-import { createSubject, getAllSubjects } from "../controllers/subject.ts";
+import {
+  createSubject,
+  deleteSubject,
+  getAllSubjects,
+  updateSubject,
+} from "../controllers/subject.ts";
 
 const subjectRouter = express.Router();
 
@@ -11,5 +16,13 @@ subjectRouter
 subjectRouter
   .route("/")
   .get(protect, authorize(["admin", "teacher"]), getAllSubjects);
+
+subjectRouter
+  .route("/delete/:id")
+  .delete(protect, authorize(["admin"]), deleteSubject);
+
+subjectRouter
+  .route("/update/:id")
+  .patch(protect, authorize(["admin"]), updateSubject);
 
 export default subjectRouter;
