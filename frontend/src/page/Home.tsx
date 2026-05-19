@@ -1,5 +1,6 @@
 import Navbar from "../components/home/Navbar";
 import Hero from "../components/home/Hero";
+import Footer from "../components/home/Footer";
 
 const Home = () => {
   return (
@@ -85,6 +86,7 @@ const Home = () => {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 };
