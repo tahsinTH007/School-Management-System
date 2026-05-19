@@ -1,10 +1,12 @@
 import Navbar from "../components/home/Navbar";
+import Hero from "../components/home/Hero";
 
 const Home = () => {
   return (
     <div>
       <Navbar />
       <main className="">
+        <Hero />
 
         {/* Partnership / Logo Cloud */}
         <section className="py-12 border-y border-gray-200 dark:border-gray-800">
