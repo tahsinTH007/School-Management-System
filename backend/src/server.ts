@@ -18,6 +18,7 @@ import classRouter from "./routes/class.ts";
 import subjectRouter from "./routes/subject.ts";
 import timeRouter from "./routes/timetable.ts";
 import examRouter from "./routes/exam.ts";
+import dashboardRouter from "./routes/dashboard.ts";
 
 dotenv.config();
 
@@ -57,6 +58,7 @@ app.use("/api/classes", classRouter);
 app.use("/api/subjects", subjectRouter);
 app.use("/api/timetables", timeRouter);
 app.use("/api/exams", examRouter);
+app.use("/api/dashboard", dashboardRouter);
 
 app.use((err: Error, _req: Request, res: Response, _next: Function) => {
   const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
