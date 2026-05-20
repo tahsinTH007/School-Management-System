@@ -1,6 +1,7 @@
 import Navbar from "../components/home/Navbar";
 import Hero from "../components/home/Hero";
 import Footer from "../components/home/Footer";
+import Stats from "../components/home/Stats";
 
 const Home = () => {
   return (
@@ -34,6 +35,8 @@ const Home = () => {
             </div>
           </div>
         </section>
+
+        <Stats />
 
         {/* Testimonial Highlight */}
         <section className="py-24 bg-white dark:bg-[#121212] overflow-hidden relative">
