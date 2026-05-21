@@ -12,7 +12,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Calendar, FileText, CheckCircle2 } from "lucide-react";
+
 import { AiInsightWidget } from "../components/dashboard/ai-insight-widget";
+import { DashboardStats } from "../components/dashboard/dashboard-stats";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -85,7 +87,9 @@ export default function Dashboard() {
       </div>
 
       {/* --- TOP ROW: STATS --- */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4"></div>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <DashboardStats role={user?.role || "student"} data={statsData} />
+      </div>
 
       {/* --- MAIN CONTENT GRID --- */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
