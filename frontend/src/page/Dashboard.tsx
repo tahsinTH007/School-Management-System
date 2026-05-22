@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { api } from "@/lib/api";
 import { Link, useNavigate } from "react-router";
 
-// UI Imports
 import {
   Card,
   CardContent,
@@ -13,21 +13,21 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Calendar, FileText, CheckCircle2 } from "lucide-react";
 
-import { AiInsightWidget } from "../components/dashboard/ai-insight-widget";
-import { DashboardStats } from "../components/dashboard/dashboard-stats";
+import { AiInsightWidget } from "@/components/dashboard/ai-insight-widget";
+import { DashboardStats } from "@/components/dashboard/dashboard-stats";
+import { useAuth } from "@/hooks/useAuth";
+import type { DashboardStatsData } from "@/types";
 
 export default function Dashboard() {
+  const { user } = useAuth();
   const navigate = useNavigate();
-  const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [statsData, setStatsData] = useState<any>({});
+  const [statsData, setStatsData] = useState<DashboardStatsData | null>(null);
 
-  // 1. Fetch Data Logic
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
         setLoading(true);
-        // THE REAL CALL
         const { data } = await api.get("/dashboard/stats");
         setStatsData(data);
       } catch (error) {
@@ -40,7 +40,6 @@ export default function Dashboard() {
     if (user) fetchDashboardData();
   }, [user]);
 
-  // 2. Loading State
   if (loading) {
     return (
       <div className="p-8 space-y-6">
@@ -63,7 +62,6 @@ export default function Dashboard() {
 
   return (
     <div className="flex-1 space-y-6 p-8 pt-6">
-      {/* --- HEADER --- */}
       <div className="flex items-center justify-between space-y-2">
         <div>
           <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
@@ -72,7 +70,6 @@ export default function Dashboard() {
           </p>
         </div>
         <div className="flex items-center space-x-2">
-          {/* Role specific actions */}
           {user?.role === "admin" && (
             <Button onClick={() => navigate("/users/students")}>
               Manage Students
@@ -86,18 +83,16 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* --- TOP ROW: STATS --- */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <DashboardStats role={user?.role || "student"} data={statsData} />
+        {statsData && (
+          <DashboardStats role={user?.role || "student"} data={statsData} />
+        )}
       </div>
 
-      {/* --- MAIN CONTENT GRID --- */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        {/* LEFT COLUMN (Content) */}
         <div className="col-span-4 space-y-4">
           <AiInsightWidget role={user?.role} />
 
-          {/* RECENT ACTIVITY CARD */}
           {user?.role === "admin" && (
             <Card>
               <CardHeader>
@@ -111,7 +106,7 @@ export default function Dashboard() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {statsData.recentActivity?.map(
+                  {statsData?.recentActivity.map(
                     (activity: string, i: number) => (
                       <div
                         key={i}
@@ -135,7 +130,6 @@ export default function Dashboard() {
           )}
         </div>
 
-        {/* RIGHT COLUMN (Schedule/Quick Links) */}
         <div className="col-span-3 space-y-4">
           <Card>
             <CardHeader>
