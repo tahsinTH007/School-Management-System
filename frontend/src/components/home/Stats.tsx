@@ -41,7 +41,7 @@ const Stats = () => {
             <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
               Enrollment & Research Growth
             </h4>
-            <div className="h-[300px] w-full">
+            <div className="h-75 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={data}>
                   <defs>

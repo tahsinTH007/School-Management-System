@@ -7,14 +7,18 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import type {
+  AdminDashboardStats,
+  StudentDashboardStats,
+  TeacherDashboardStats,
+} from "@/types";
 
-interface StatsProps {
-  role: string;
-  data: any; // In real app, define a strict interface
-}
+type StatsProps =
+  | { role: "admin"; data: AdminDashboardStats }
+  | { role: "teacher"; data: TeacherDashboardStats }
+  | { role: "student"; data: StudentDashboardStats };
 
 export function DashboardStats({ role, data }: StatsProps) {
-  // --- ADMIN VIEW ---
   if (role === "admin") {
     return (
       <>
@@ -116,7 +120,6 @@ export function DashboardStats({ role, data }: StatsProps) {
     );
   }
 
-  // --- STUDENT VIEW ---
   return (
     <>
       <Card>
@@ -158,4 +161,3 @@ export function DashboardStats({ role, data }: StatsProps) {
     </>
   );
 }
-

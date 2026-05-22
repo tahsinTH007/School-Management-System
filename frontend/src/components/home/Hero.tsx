@@ -32,7 +32,7 @@ const Hero = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
-              <button className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-[#3ecf8e] text-black px-8 py-4 rounded-lg font-bold hover:bg-[#34b27b] transition-all transform hover:translate-y-[-2px] shadow-lg shadow-[#3ecf8e]/20">
+              <button className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-[#3ecf8e] text-black px-8 py-4 rounded-lg font-bold hover:bg-[#34b27b] transition-all transform hover:-translate-y-0.5 shadow-lg shadow-[#3ecf8e]/20">
                 <span>Start Application</span>
                 <ArrowRight className="w-5 h-5" />
               </button>
@@ -73,7 +73,7 @@ const Hero = () => {
                 alt="Edunexus Modern Campus"
                 className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 dark:from-[#121212] via-transparent to-transparent"></div>
+              <div className="absolute inset-0 bg-linear-to-t from-gray-900/60 dark:from-[#121212] via-transparent to-transparent"></div>
               <div className="absolute bottom-6 left-6 right-6 p-6 bg-white/90 dark:bg-[#1c1c1c]/90 backdrop-blur-md rounded-xl border border-gray-200 dark:border-gray-700">
                 <p className="text-sm font-medium text-[#3ecf8e] mb-1 uppercase tracking-wider">
                   Upcoming Event

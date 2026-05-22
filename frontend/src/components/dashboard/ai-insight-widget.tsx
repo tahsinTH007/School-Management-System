@@ -17,12 +17,7 @@ export function AiInsightWidget({ role }: Props) {
   const generateInsight = async () => {
     setLoading(true);
     try {
-      // In a real app, you would call:
-      // const { data } = await api.post('/ai/generate-insight', { context: "dashboard", role });
-      // setInsight(data.text);
-
-      // --- MOCK AI RESPONSE (Simulation) ---
-      await new Promise((resolve) => setTimeout(resolve, 2000)); // Fake delay
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
       let mockResponse = "";
       if (role === "admin") {
@@ -39,7 +34,7 @@ export function AiInsightWidget({ role }: Props) {
       }
 
       setInsight(mockResponse);
-    } catch (e) {
+    } catch {
       toast.error("Could not generate insight");
     } finally {
       setLoading(false);

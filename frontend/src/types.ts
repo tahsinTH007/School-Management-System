@@ -87,21 +87,21 @@ type BaseDashboardStats = {
   recentActivity: string[];
 };
 
-type AdminDashboardStats = BaseDashboardStats & {
+export type AdminDashboardStats = BaseDashboardStats & {
   totalStudents: number;
   totalTeachers: number;
   activeExams: number;
   avgAttendance: string;
 };
 
-type TeacherDashboardStats = BaseDashboardStats & {
+export type TeacherDashboardStats = BaseDashboardStats & {
   myClassesCount: number;
   pendingGrading: number;
   nextClass: string;
   nextClassTime: string;
 };
 
-type StudentDashboardStats = BaseDashboardStats & {
+export type StudentDashboardStats = BaseDashboardStats & {
   myAttendance: string;
   pendingAssignments: number;
   nextExam: string;
