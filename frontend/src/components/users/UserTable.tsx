@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { user } from "@/types";
+import CustomPagination from "../global/CustomPagination";
 
 interface Props {
   role: string;
@@ -149,6 +150,14 @@ const UserTable = ({
           )}
         </TableBody>
       </Table>
+      {users.length > 10 && (
+        <CustomPagination
+          loading={loading}
+          page={pageNum}
+          setPage={setPageNum}
+          totalPages={totalPages}
+        />
+      )}
     </div>
   );
 };
