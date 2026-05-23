@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import type { pagination, user, UserRole } from "@/types";
+import Search from "@/components/global/Search";
 
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -23,19 +24,16 @@ export default function UserManagementPage({
   const [totalPages, setTotalPages] = useState(1);
   const [debouncedSearch, setDebouncedSearch] = useState("");
 
-  // Form States
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingUser, setEditingUser] = useState<user | null>(null);
 
-  // Delete States
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
-  // Handle Debounce (Wait 500ms after typing stops)
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearch(search);
-      setPage(1); // Reset to page 1 when search changes
+      setPage(1);
     }, 500);
 
     return () => clearTimeout(handler);
@@ -44,13 +42,11 @@ export default function UserManagementPage({
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      // Construct Query
       const searchParam = debouncedSearch ? `&search=${debouncedSearch}` : "";
       const roleParam = `&role=${role}`;
       const { data } = (await api.get(
         `/users?page=${page}&limit=10${roleParam}${searchParam}`,
       )) as { data: { users: user[]; pagination: pagination } };
-      // Handle response based on your new controller structure
       if (data.users) {
         setUsers(data.users);
         setTotalPages(data.pagination.pages);
@@ -67,7 +63,7 @@ export default function UserManagementPage({
 
   useEffect(() => {
     fetchUsers();
-  }, [role, page, debouncedSearch]); // Re-fetch if role changes
+  }, [role, page, debouncedSearch]);
 
   const handleCreate = () => {
     setEditingUser(null);
@@ -99,13 +95,13 @@ export default function UserManagementPage({
           <p className="text-muted-foreground">{description}</p>
         </div>
         <div className="flex gap-2">
+          <Search search={search} setSearch={setSearch} title={`${role}s`} />
           <Button onClick={handleCreate}>
             <Plus className="mr-2 h-4 w-4" /> Add{" "}
             {role.charAt(0).toUpperCase() + role.slice(1)}
           </Button>
         </div>
       </div>
-
     </div>
   );
 }
