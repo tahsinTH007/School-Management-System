@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Plus } from "lucide-react";
 import { api } from "@/lib/api";
+import UserTable from "@/components/users/UserTable";
 
 interface Props {
   role: UserRole;
@@ -102,6 +103,19 @@ export default function UserManagementPage({
           </Button>
         </div>
       </div>
+
+      <UserTable
+        role={role}
+        loading={loading}
+        setDeleteId={setDeleteId}
+        setIsDeleteOpen={setIsDeleteOpen}
+        setEditingUser={setEditingUser}
+        setIsFormOpen={setIsFormOpen}
+        users={users}
+        setPageNum={setPage}
+        pageNum={page}
+        totalPages={totalPages}
+      />
     </div>
   );
 }
