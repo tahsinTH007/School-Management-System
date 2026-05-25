@@ -1,6 +1,6 @@
-
 import type { user, UserRole } from "@/types";
 import Modal from "../global/Modal";
+import UniversalUserForm from "../auth/UniversalUserForm";
 
 const UserDialog = ({
   open,
@@ -22,13 +22,18 @@ const UserDialog = ({
     onSuccess?.();
   };
   return (
-        <Modal
+    <Modal
       title={title}
       description={description}
       open={open}
       setOpen={setOpen}
     >
-
+      <UniversalUserForm
+        type={editingUser ? "update" : "create"}
+        role={role}
+        initialData={editingUser}
+        onSuccess={onSuccessPlus}
+      />
     </Modal>
   );
 };

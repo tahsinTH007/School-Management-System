@@ -7,6 +7,8 @@ import { toast } from "sonner";
 import { Plus } from "lucide-react";
 import { api } from "@/lib/api";
 import UserTable from "@/components/users/UserTable";
+import UserDialog from "@/components/users/UserDialog";
+import CustomAlert from "@/components/global/CustomAlert";
 
 interface Props {
   role: UserRole;
@@ -115,6 +117,22 @@ export default function UserManagementPage({
         setPageNum={setPage}
         pageNum={page}
         totalPages={totalPages}
+      />
+
+      <UserDialog
+        editingUser={editingUser}
+        role={role}
+        open={isFormOpen}
+        setOpen={setIsFormOpen}
+        onSuccess={fetchUsers}
+      />
+
+      <CustomAlert
+        isOpen={isDeleteOpen}
+        setIsOpen={setIsDeleteOpen}
+        handleDelete={handleDelete}
+        title="Delete User?"
+        description="This will permanently delete this user from the system."
       />
     </div>
   );

@@ -47,7 +47,7 @@ export function CustomMultiSelect<T extends FieldValues>({
           <FieldLabel htmlFor={name}>{label}</FieldLabel>
           <MultiSelect
             onValuesChange={field.onChange}
-            values={field.value || []} // Ensure it is always an array
+            values={field.value || []} 
           >
             <MultiSelectTrigger
               className="w-full"
