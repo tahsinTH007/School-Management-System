@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import type { Class, pagination } from "@/types";
 import Search from "@/components/global/Search";
 import CustomAlert from "@/components/global/CustomAlert";
+import ClassTable from "@/components/classes/ClassTable";
 
 const Classes = () => {
   const [classes, setClasses] = useState<Class[]>([]);
@@ -104,6 +105,16 @@ const Classes = () => {
           </Button>
         </div>
       </div>
+
+      <ClassTable
+        data={classes}
+        loading={loading}
+        onEdit={handleEdit}
+        onDelete={handleDeleteClick}
+        page={pageNum}
+        setPage={setPageNum}
+        totalPages={totalPages}
+      />
 
       <CustomAlert
         handleDelete={confirmDelete}
