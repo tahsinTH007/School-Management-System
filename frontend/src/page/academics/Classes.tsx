@@ -9,6 +9,7 @@ import type { Class, pagination } from "@/types";
 import Search from "@/components/global/Search";
 import CustomAlert from "@/components/global/CustomAlert";
 import ClassTable from "@/components/classes/ClassTable";
+import ClassForm from "@/components/classes/ClassForm";
 
 const Classes = () => {
   const [classes, setClasses] = useState<Class[]>([]);
@@ -114,6 +115,13 @@ const Classes = () => {
         page={pageNum}
         setPage={setPageNum}
         totalPages={totalPages}
+      />
+
+      <ClassForm
+        open={isFormOpen}
+        onOpenChange={setIsFormOpen}
+        initialData={editingClass}
+        onSuccess={fetchClasses}
       />
 
       <CustomAlert
